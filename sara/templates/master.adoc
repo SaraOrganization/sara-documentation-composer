@@ -1,0 +1,3 @@
+= {% block title %}{{doc.title}}{% endblock %}
+
+{% include 'doc_identification_cartouche.adoc' %}

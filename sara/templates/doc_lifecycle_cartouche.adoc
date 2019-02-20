@@ -1,0 +1,20 @@
+//
+// Documentation identification cartouche
+//
+
+[stripes="none"]]
+|=============================================
+|*Prepared by*: | - |*Date*: | Signature
+//{% for preparator in doc.preparators%}
+| {{preparator.name}} | {{preparator.function}} | {{preparator.date}} | -
+//{% endfor}
+|*Contributors*: | - |*Date*: | -
+//{% for contributor in doc.contributors%}
+2.+| {{contributor.name}} | {{doc.name}} |.
+//{% endfor}
+
+|*Approved*: | - |*Date*: | Signature
+//{% for approbator in doc.preparators%}
+| {{approbator.name}} | {{approbator.function}} | {{approbator.date}} | -
+//{% endfor}
+|=============================================
