@@ -1,1 +1,38 @@
 {% extends "master.adoc" %}
+
+{%block body%}
+
+== Purpose and scope
+
+The purpose of this document is to describe the results obtained in the software quality analysis and code inspection of the {LONG_DESCRIPTION} software product.
+
+
+First objective is to HELP the development team. +
+Please contribute to improve this report. +
+Any comments, ideas are welcome !
+
+Other objectives are:
+
+* Deliver a Quality status on the code;
+* Communicate it to the code authors, the whole development team and managers;
+* Possibly set-up action plan for improvement.
+
+
+For each of the measurements, we cover the following items:
+
+* What is measured and why;
+* The measurement tool(s) used;
+* The measurement results;
+* An analysis of the results and, potentially, actions to be carried out.
+
+The conclusions are derived from good practices and should be taken as a guide instead of a prescription.
+
+__This analysis has been done without knowledge (science, SW implementation…) on this project. Please do not hesitate to mention any error or misunderstanding.__
+
+
+[IMPORTANT]
+====
+Feedback from the development team would be very appreciated.
+
+====
+{% endblock %}

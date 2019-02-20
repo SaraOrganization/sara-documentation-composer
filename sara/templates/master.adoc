@@ -1,3 +1,11 @@
+// MASTER FOR ALL DOCUMENTS
+
 = {% block title %}{{doc.title}}{% endblock %}
 
 {% include 'doc_identification_cartouche.adoc' %}
+
+{% include 'doc_lifecycle_cartouche.adoc' %}
+
+{% include 'doc_issues_cartouche.adoc' %}
+
+{% block body %}body{% endblock %}

@@ -5,7 +5,7 @@
 [cols="1,2,1,3", stripes="none"]
 |=============================================
 |*Title* :
-3.+| {{doc.name}}
+3.+| {{doc.title}}
 |*Date*:
 | {{doc.date}}
 |*Issue*:

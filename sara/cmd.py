@@ -3,9 +3,9 @@ import sys
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
 
-from sara.commons import serialization
-from sara.domain.project import Project
-from sara.domain.document import Document
+import related
+from sara.models import Project
+from sara.models import Document
 
 
 class Cmd:
@@ -22,8 +22,9 @@ class Cmd:
         template_group = parser.add_argument_group("templates")
         template_group.add_argument("--location",help="Template folders location",default=".")
 
-        project_group = parser.add_argument_group("project")
-        project_group.add_argument("--definition",help="Project definition file in yaml format",default=".")
+        project_group = parser.add_argument_group("definitions")
+        project_group.add_argument("--project",help="Project definition file in yaml format",default=".")
+        project_group.add_argument("--document",help="Documentation definition file in yaml format",default=".")
 
         parser.add_argument("action", choices=['render','sample'])
         parser.add_argument("--template", required=True)
@@ -65,8 +66,12 @@ class Cmd:
         if self.domain_loaded_from_samples :
             self._create_samples()
         else:
-            self.project = serialization.load_from_yaml(Project, arguments.properties)
-            self.document = serialization.load_from_yaml(Document, arguments.properties)
+            with open(arguments.project,'r') as file:
+                self.project = related.from_yaml(file,Project)
+                print(self.project)
+
+            with open(arguments.document, 'r') as file:
+                self.document =related.from_yaml(file,Document)
 
         self.document.configure_from_project(self.project)
 
@@ -86,7 +91,7 @@ class Cmd:
         self.document = Document.sample()
         print(self.document)
         print(' - as yaml - ')
-        print(serialization.to_yaml(self.document))
+        print(related.to_yaml(self.document))
 
 
 
