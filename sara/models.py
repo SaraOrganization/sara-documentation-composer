@@ -1,49 +1,68 @@
-import related
+from related import StringField, SetField, SequenceField, DateField, ChildField, MappingField
+from related import immutable, mutable
 
-@related.mutable
+@immutable
+class Agent:
+    name = StringField()
+    role = StringField(required=False)
+
+missingAgent = Agent(name="Missing information",role="Missing information")
+
+@mutable
 class Project:
-    name = related.StringField()
-    long_name = related.StringField()
-    version = related.StringField(default="0.0.1")
+    name = StringField()
+    long_name = StringField()
+    leaders = SetField(Agent, default=[missingAgent])
+    implementation_leaders = SetField(Agent, default=[missingAgent])
+    validation_leaders = SetField(Agent, default=[missingAgent])
+    version = StringField(default="0.0.1")
 
     @staticmethod
     def sample():
-        return Project(name='My Project',long_name='My very precious project about stars')
+        return Project(name='My Project',
+                       long_name='My very precious project about stars',
+                       leaders=[Agent(name='John Doe')],
+                       implementation_leaders=[Agent(name='Foo Bar'),Agent(name='Stan Getz')],
+                       validation_leaders=[Agent(name='Billy Holliday'),Agent(name='Chet Baker')])
 
-
-@related.mutable
-class Agent:
-    name = related.StringField()
-    role = related.StringField(required=False)
-
-@related.mutable
+@immutable
 class Action:
-    name = related.StringField()
-    description = related.StringField()
-    role = related.StringField(required=False)
-    date = related.DateField(required=False)
+    name = StringField()
+    description = StringField()
+    role = StringField(required=False)
+    date = DateField(required=False)
 
-@related.mutable
+@immutable
 class Issue:
-    id = related.StringField()
-    description = related.StringField()
-    date = related.DateField()
-    comment = related.StringField(required=False)
-    page = related.SetField(str,required=False)
+    id = StringField()
+    description = StringField()
+    date = DateField()
+    comment = StringField(required=False)
+    page = SetField(str,required=False)
 
 
-@related.mutable
+@immutable
+class LinkedDocument:
+    id = StringField()
+    title = StringField()
+    document_reference =  StringField()
+    issue = StringField()
+    date = DateField()
+
+@mutable
 class Document:
-    title = related.StringField(required=True)
-    version = related.StringField(required=False)
-    date = related.DateField(required=False)
-    reference = related.StringField(required=False)
-    custodian = related.ChildField(Agent, required=False)
-    preparations = related.SequenceField(Action, required=False)
-    contributions = related.SequenceField(Action, required=False)
-    approbations = related.SequenceField(Action, required=False)
-    issues = related.SequenceField(Issue, required=False)
-    title_template = related.StringField(default="Document about {name}", required=False)
+    title = StringField(required=True)
+    version = StringField(required=False)
+    date = DateField(required=False)
+    reference = StringField(required=False)
+    custodian = ChildField(Agent, required=False)
+    preparations = SequenceField(Action, required=False)
+    contributions = SequenceField(Action, required=False)
+    approbations = SequenceField(Action, required=False)
+    issues = SequenceField(Issue, required=False)
+    applicable_documents = SequenceField(LinkedDocument, required=False)
+    reference_documents = SequenceField(LinkedDocument, required=False)
+    title_template = StringField(default="Document about {name}", required=False)
 
 
     def configure_from_project(self, project):

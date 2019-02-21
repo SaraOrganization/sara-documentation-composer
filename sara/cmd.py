@@ -20,7 +20,7 @@ class Cmd:
         parser = argparse.ArgumentParser(description="Cmd")
 
         template_group = parser.add_argument_group("templates")
-        template_group.add_argument("--location",help="Template folders location",default=".")
+        template_group.add_argument("--location", action='append', help="Template folders locations")
 
         project_group = parser.add_argument_group("definitions")
         project_group.add_argument("--project",help="Project definition file in yaml format",default=".")
@@ -76,8 +76,10 @@ class Cmd:
         self.document.configure_from_project(self.project)
 
     def render(self):
-        args = { 'title': 'Foo',
-                 'doc': self.document }
+        args = {
+            'doc': self.document,
+            'project': self.project
+        }
         result = self._template.render(args)
         print(result)
 
