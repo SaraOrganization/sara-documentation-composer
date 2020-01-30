@@ -4,8 +4,8 @@ from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
 
 import related
-from sara.models import Project
-from sara.models import Document
+
+from models import Project, Document
 
 
 class Cmd:
