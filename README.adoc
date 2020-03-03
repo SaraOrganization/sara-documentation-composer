@@ -135,6 +135,14 @@ source ./ven/bin/activate
 ./venv/Scripts/activate
 ----
 +
+. Install dependencies
++
+[source,bash]
+----
+pip install -r requirements.txt
+----
+
++
 . Run the demo
 +
 [source,bash]
