@@ -113,6 +113,13 @@ image::doc/images/sample_01.png[]
 git clone https://github.com/SaraOrganization/sara-documentation-composer.git
 ----
 +
+. Change directory
++
+[source,bash]
+----
+cd sara-documentation-composer/
+----
++
 . Create a virtual env
 +
 [source,bash]
