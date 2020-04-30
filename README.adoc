@@ -132,7 +132,7 @@ python -m venv ./venv
 +
 [source,bash]
 ----
-source ./ven/bin/activate
+source ./venv/bin/activate
 ----
 +
 .. Windows
